@@ -7,73 +7,69 @@
 
 import SwiftUI
 struct ContentView: View {
-    @State var newword = ""
-    @State var text: String = ""
-    
-    var foods = [ "burger" , "pizza" , "fries" , "sandwich" , "potato&cheese"]
+    @State var Foods = [ "burger" , "pizza" , "fries" , "sandwich" , "potato&cheese"]
+    @State var addnew = ""
     var body: some View {
         
-        VStack{
-            
-            List(foods, id: \.self) { foods in
+        VStack {
+            List(Foods, id: \.self){ food in
                 HStack{
-                    Image(foods)
+                    Image(food)
                         .resizable()
-                        .frame(width: 40, height: 40)
-                    Text(foods)
-                    
+                        .scaledToFit()
+                        .frame(width: 50, height: 60)
+                    Text(food)
                 }
                 
                 
-                
             }
-            
-            
             
             HStack{
-                
-                Button(action: {
-                    print("Button action")
-                    
-                }) {
+                Button {
+                    Foods.append(addnew)
+                } label: {
                     Image(systemName: "plus")
-                    
+                        .font(.title)
+                        .foregroundColor(.white)
                 }
+                .frame(width: 70, height: 70)
+                .background(Color.cyan)
+                .cornerRadius(25)
                 
+                TextField("add new item", text: $addnew)
                 
+                Button {
+                    Foods.remove(at: 0
+                    )
+                } label: {
+                    Image(systemName: "minus")
+                        .font(.title)
+                        .foregroundColor(.white)
+                }
+                .frame(width: 70, height: 70)
+                .background(Color.red)
+                .cornerRadius(25)
                 
+                Button {
+                    Foods.append(Foods.randomElement() ?? "")
+                } label: {
+                    Image(systemName: "questionmark")
+                        .font(.title)
+                        .foregroundColor(.white)
+                }
+                .frame(width: 70, height: 70)
+                .background(Color.orange)
+                .cornerRadius(25)
                 
-                Image(systemName: "plus")
-                    .font(.largeTitle)
-                    .frame(width: 70, height: 70)
-                    .background(.blue)
-                    .clipShape(Circle())
-                
-                TextField("add item", text: $text)
-                    .frame(width: 100, height: 50)
-                
-                
-                Image(systemName: "minus")
-                    .font(.largeTitle)
-                    .frame(width: 70, height: 70)
-                    .background(.red)
-                    .clipShape(Circle())
-                
-                Image(systemName: "questionmark")
-                    .font(.largeTitle)
-                    .frame(width: 70, height: 70)
-                    .background(.orange)
-                    .clipShape(Circle())
-                
-                
-            }
+            } .padding()
             
         }
         
         
         
+        
+        
     }
-    
     
     
     
